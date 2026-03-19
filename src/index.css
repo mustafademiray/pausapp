@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 18% 18%;
+    --foreground: 28 35% 88%;
+
+    --card: 135 14% 76%;
+    --card-foreground: 150 18% 18%;
+
+    --popover: 150 15% 24%;
+    --popover-foreground: 28 35% 88%;
+
+    --primary: 28 35% 88%;
+    --primary-foreground: 150 18% 18%;
+
+    --secondary: 150 15% 24%;
+    --secondary-foreground: 28 35% 88%;
+
+    --muted: 150 12% 28%;
+    --muted-foreground: 135 14% 66%;
+
+    --accent: 30 35% 35%;
+    --accent-foreground: 28 35% 88%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 150 12% 28%;
+    --input: 150 12% 28%;
+    --ring: 28 35% 88%;
+
+    --radius: 1rem;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+
+    --success: 145 63% 49%;
+    --warning: 0 75% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  }
+}
