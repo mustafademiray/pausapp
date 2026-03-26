@@ -32,7 +32,7 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4">
           <a
-            href="https://apps.apple.com/tr/app/paus-save-money-spend-less/id6757305070"
+            href="https://apps.apple.com/tr/app/paus-stop-impulse-buying/id6757305070"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-foreground/10 border border-foreground/15 text-foreground px-8 py-4 rounded-2xl font-body font-semibold text-lg hover:bg-foreground/15 transition-colors"

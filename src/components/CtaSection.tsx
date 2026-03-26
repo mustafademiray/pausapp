@@ -21,7 +21,7 @@ const CtaSection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
           <a
-            href="https://apps.apple.com/tr/app/paus-save-money-spend-less/id6757305070"
+            href="https://apps.apple.com/tr/app/paus-stop-impulse-buying/id6757305070"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-2xl font-body font-semibold text-lg hover:opacity-90 transition-opacity"
