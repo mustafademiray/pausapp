@@ -1,46 +1,41 @@
 {
-    "$schema": "https://wvw.dev/apps.schema.json",
-    "store": {
-      "name": "Mustafa Demiray",
-      "developer": "Mustafa Demiray",
-      "github": "https://github.com/mustafademiray",
-      "url": "https://musti.cc"
-    },
-    "categories": [
-      { "id": "ios", "name": "iOS Apps" },
-      { "id": "lifestyle", "name": "Lifestyle" },
-      { "id": "finance", "name": "Finance" }
-    ],
-    "apps": [
-      {
-        "id": "paus",
-        "name": "paus",
-        "subtitle": "Think before you spend by seeing prices in work hours.",
-        "description": "paus helps people slow down impulse purchases by turning item prices into work hours and making spending decisions feel more intentional.",
-        "longDescription": "paus helps people slow down impulse purchases by turning item prices into work hours and making spending decisions feel more intentional. The app tracks spending and saving choices, lets users pause uncertain purchases with reminders, supports multiple currencies and languages, and adapts to personal financial goals.",
-        "icon": "https://raw.githubusercontent.com/mustafademiray/pausapp/main/paus_logo.png",
-        "iconEmoji": "⏸️",
-        "category": ["ios", "lifestyle", "finance"],
-        "platform": "iOS",
-        "price": "Freemium",
-        "github": "https://github.com/mustafademiray/pausapp",
-        "homepage": "https://apps.apple.com/tr/app/paus-stop-impulse-buying/id6757305070",
-        "language": "React Native",
-        "requirements": "iOS 14+",
-        "features": [
-          "Converting item prices into work hours",
-          "Tracking spending and saving decisions",
-          "Providing reminders for uncertain purchases",
-          "Supporting multiple currencies and languages",
-          "Personalizing the experience based on financial goals"
-        ],
-        "screenshots": [
-          "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_1.png",
-          "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_2.png",
-          "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_3.png",
-          "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_4.png",
-          "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_5.png"
-        ]
-      }
-    ]
-  }
+  "$schema": "https://wvw.dev/apps.schema.json",
+  "store": {
+    "name": "Mustafa Demiray",
+    "developer": "Mustafa Demiray",
+    "github": "https://github.com/mustafademiray",
+    "url": "https://musti.cc"
+  },
+  "apps": [
+    {
+      "id": "paus",
+      "name": "paus",
+      "subtitle": "Think before you spend by seeing prices in work hours.",
+      "description": "paus helps people slow down impulse purchases by turning item prices into work hours and making spending decisions feel more intentional.",
+      "longDescription": "paus helps people slow down impulse purchases by turning item prices into work hours and making spending decisions feel more intentional. The app tracks spending and saving choices, lets users pause uncertain purchases with reminders, supports multiple currencies and languages, and adapts to personal financial goals.",
+      "icon": "https://raw.githubusercontent.com/mustafademiray/pausapp/main/paus_logo.png",
+      "iconEmoji": "⏸️",
+      "category": ["ios", "lifestyle", "finance"],
+      "platform": "iOS",
+      "price": "Freemium",
+      "github": "https://github.com/mustafademiray/pausapp",
+      "homepage": "https://apps.apple.com/tr/app/paus-stop-impulse-buying/id6757305070",
+      "language": "React Native",
+      "requirements": "iOS 14+",
+      "features": [
+        "Converting item prices into work hours",
+        "Tracking spending and saving decisions",
+        "Providing reminders for uncertain purchases",
+        "Supporting multiple currencies and languages",
+        "Personalizing the experience based on financial goals"
+      ],
+      "screenshots": [
+        "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_1.png",
+        "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_2.png",
+        "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_3.png",
+        "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_4.png",
+        "https://raw.githubusercontent.com/mustafademiray/pausapp/main/appstore_img_en_5.png"
+      ]
+    }
+  ]
+}
