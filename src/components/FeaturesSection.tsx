@@ -6,7 +6,7 @@ const features = [
     icon: Clock,
     title: "See prices in work hours",
     description:
-      "A $89 jacket costs 9 minutes of your life. That perspective changes everything.",
+      "paus shows every price in hours of your life. A $200 pair of sneakers costs a full workday. Worth it?",
   },
   {
     icon: Pause,
@@ -24,7 +24,7 @@ const features = [
     icon: TrendingDown,
     title: "Track your progress",
     description:
-      "See how much you've saved versus spent. Every smart decision adds up.",
+      "See what pausing actually saves you. Every skipped impulse buy adds up faster than you think.",
   },
 ];
 
@@ -39,11 +39,11 @@ const FeaturesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-display text-foreground mb-4">
-            Mindful money, made simple
+            Small habit. Big savings.
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto font-body">
-            Simple tools that help you pause, reflect, and make better financial
-            decisions every day.
+            paus doesn't budget for you — it stops the leak at the exact moment
+            you're about to spend.
           </p>
         </motion.div>
 

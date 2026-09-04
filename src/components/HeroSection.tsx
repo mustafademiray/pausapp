@@ -26,8 +26,8 @@ const HeroSection = () => {
         </h1>
 
         <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10 font-body">
-          paus turns every purchase into a simple question — is it worth your
-          time? See prices in work hours and build smarter spending habits.
+          Impulse buys quietly drain your paycheck. paus turns every price into
+          hours of your life — so you only buy what's actually worth it.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4">

@@ -16,7 +16,8 @@ const CtaSection = () => {
           Ready to take a paus?
         </h2>
         <p className="text-muted-foreground text-lg font-body mb-10 max-w-md mx-auto relative z-10">
-          Download free and start making mindful spending decisions today.
+          Every paused purchase is money back in your pocket. Download free and
+          keep your next paycheck.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">

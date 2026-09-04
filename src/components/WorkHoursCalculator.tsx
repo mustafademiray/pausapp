@@ -81,7 +81,7 @@ const WorkHoursCalculator = () => {
                       type="number"
                       min="0.01"
                       step="0.01"
-                      placeholder="89"
+                      placeholder="200"
                       value={price}
                       onChange={(e) => { setPrice(e.target.value); setResult(null); }}
                       className="w-full bg-background/50 text-foreground placeholder:text-foreground/30 rounded-xl pl-7 pr-3 py-3 font-body text-base border border-foreground/10 focus:outline-none focus:ring-2 focus:ring-primary/40 transition-shadow"
@@ -108,13 +108,13 @@ const WorkHoursCalculator = () => {
                 >
                   <div className="mt-6 text-center py-6 bg-foreground/5 rounded-2xl border border-foreground/10">
                     <p className="text-muted-foreground font-body text-sm mb-1">
-                      You'd need to work
+                      This item costs you
                     </p>
                     <p className="text-4xl md:text-5xl font-display text-primary">
                       {formatResult()}
                     </p>
                     <p className="text-muted-foreground font-body text-sm mt-1">
-                      to afford this item
+                      of your life. Is it worth it?
                     </p>
                   </div>
                 </motion.div>
