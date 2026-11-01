@@ -1,5 +1,4 @@
 import HeroSection from "@/components/HeroSection";
-import WorkHoursCalculator from "@/components/WorkHoursCalculator";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import CtaSection from "@/components/CtaSection";
@@ -9,7 +8,7 @@ import FloatingMascot from "@/components/FloatingMascot";
 const Index = () => {
   return (
     <main
-      className="min-h-screen relative overflow-x-hidden"
+      className="min-h-screen relative overflow-x-clip"
       style={{
         background: `linear-gradient(
           180deg,
@@ -35,9 +34,8 @@ const Index = () => {
 
       <div className="relative z-10">
         <HeroSection />
-        <WorkHoursCalculator />
-        <FeaturesSection />
         <HowItWorksSection />
+        <FeaturesSection />
         <CtaSection />
         <Footer />
       </div>

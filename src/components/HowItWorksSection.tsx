@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { Bell, Check, Flame, Pause, Zap } from "lucide-react";
 import pausLogo from "@/assets/paus-logo.png";
 
-const STEP_MS = 4500;
+const PHONE_HEIGHT = 620;
 
 const steps = [
   {
@@ -26,34 +33,67 @@ const steps = [
   },
 ];
 
+// Shrinks the phone mockup so it fits the pinned viewport next to the step copy.
+const usePhoneScale = () => {
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const update = () => {
+      const reserved = window.innerWidth >= 1024 ? 96 : 220;
+      const fit = (window.innerHeight - reserved) / PHONE_HEIGHT;
+      setScale(Math.min(1, Math.max(0.55, Math.round(fit * 20) / 20)));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return scale;
+};
+
 const HowItWorksSection = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
   const [step, setStep] = useState(0);
-  const [hovered, setHovered] = useState(false);
   const [chosen, setChosen] = useState(false);
   const [decided, setDecided] = useState(false);
   const reduced = useReducedMotion();
+  const phoneScale = usePhoneScale();
+
+  // 0 → 1 while the pinned phone scrolls through all steps
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  });
+  // 0 → 1 within the active step, drives its progress bar
+  const stepProgress = useTransform(scrollYProgress, (v) => {
+    const pos = v * steps.length;
+    return Math.min(1, pos - Math.min(steps.length - 1, Math.floor(pos)));
+  });
+
+  const syncToScroll = (v: number) => {
+    const pos = Math.min(Math.max(v, 0), 1) * steps.length;
+    setStep(Math.min(steps.length - 1, Math.floor(pos)));
+    setChosen(pos > 1.4);
+    setDecided(pos > 2.5);
+  };
+
+  useMotionValueEvent(scrollYProgress, "change", syncToScroll);
 
   useEffect(() => {
-    if (reduced) {
-      setChosen(step === 1);
-      setDecided(step === 2);
-      return;
-    }
-    setChosen(false);
-    setDecided(false);
-    let t: ReturnType<typeof setTimeout> | undefined;
-    if (step === 1) t = setTimeout(() => setChosen(true), 1600);
-    if (step === 2) t = setTimeout(() => setDecided(true), 2400);
-    return () => {
-      if (t) clearTimeout(t);
-    };
-  }, [step, reduced]);
+    syncToScroll(scrollYProgress.get());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  useEffect(() => {
-    if (reduced || hovered) return;
-    const i = setInterval(() => setStep((s) => (s + 1) % steps.length), STEP_MS);
-    return () => clearInterval(i);
-  }, [reduced, hovered]);
+  const goToStep = (i: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const top = track.getBoundingClientRect().top + window.scrollY;
+    const range = track.offsetHeight - window.innerHeight;
+    window.scrollTo({
+      top: top + (range * (i + 0.6)) / steps.length,
+      behavior: reduced ? "auto" : "smooth",
+    });
+  };
 
   const screenTransition = {
     initial: { opacity: 0, x: 32 },
@@ -63,13 +103,13 @@ const HowItWorksSection = () => {
   };
 
   return (
-    <section className="relative py-24 px-6 overflow-hidden">
+    <section className="relative pt-16 md:pt-24 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center"
         >
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary/70 font-body mb-3">
             The shopping stopper
@@ -82,21 +122,62 @@ const HowItWorksSection = () => {
             breaks the cycle with one simple habit.
           </p>
         </motion.div>
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div ref={trackRef} className="relative h-[320vh]">
+        <div className="sticky top-0 h-svh max-w-6xl mx-auto grid lg:grid-cols-2 content-center items-center gap-6 lg:gap-20">
           <div className="flex flex-col items-center lg:items-start lg:order-1">
+            <div className="lg:hidden w-full max-w-sm text-center">
+              <div className="mb-4 flex gap-1.5">
+                {steps.map((s, i) => (
+                  <button
+                    key={s.title}
+                    aria-label={s.title}
+                    onClick={() => goToStep(i)}
+                    className="h-1 flex-1 rounded-full bg-foreground/10 overflow-hidden"
+                  >
+                    {i < step && <div className="h-full bg-primary/70" />}
+                    {i === step && (
+                      <motion.div
+                        style={{ scaleX: stepProgress }}
+                        className="h-full bg-primary/70 origin-left"
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+              <div className="min-h-[6.5rem]">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={step}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <h3 className="font-display text-xl text-foreground">
+                      {steps[step].title}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground font-body leading-relaxed">
+                      {steps[step].description}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="space-y-3 w-full max-w-lg"
+              className="hidden lg:block space-y-3 w-full max-w-lg"
             >
               {steps.map((s, i) => {
                 const active = step === i;
                 return (
                   <button
                     key={s.title}
-                    onClick={() => setStep(i)}
+                    onClick={() => goToStep(i)}
                     className={`w-full text-left rounded-2xl border p-5 transition-colors duration-300 ${
                       active
                         ? "bg-foreground/10 border-primary/30"
@@ -129,17 +210,11 @@ const HowItWorksSection = () => {
                         <p className="mt-1 text-sm text-muted-foreground font-body leading-relaxed">
                           {s.description}
                         </p>
-                        {active && !reduced && !hovered && (
+                        {active && (
                           <div className="mt-3 h-1 rounded-full bg-foreground/10 overflow-hidden">
                             <motion.div
-                              key={step}
+                              style={{ scaleX: stepProgress }}
                               className="h-full bg-primary/70 rounded-full origin-left"
-                              initial={{ scaleX: 0 }}
-                              animate={{ scaleX: 1 }}
-                              transition={{
-                                duration: STEP_MS / 1000,
-                                ease: "linear",
-                              }}
                             />
                           </div>
                         )}
@@ -153,8 +228,7 @@ const HowItWorksSection = () => {
 
           <div
             className="relative flex justify-center lg:order-2"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            style={{ height: PHONE_HEIGHT * phoneScale }}
           >
             <div className="absolute w-72 h-72 rounded-full bg-primary/10 blur-3xl" />
             <motion.div
@@ -162,7 +236,8 @@ const HowItWorksSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative w-[290px] sm:w-[320px] h-[620px] rounded-[2.75rem] border-[6px] border-foreground/15 bg-background/60 shadow-2xl shadow-black/40 overflow-hidden"
+              style={{ scale: phoneScale, transformOrigin: "top center" }}
+              className="relative shrink-0 w-[290px] sm:w-[320px] h-[620px] rounded-[2.75rem] border-[6px] border-foreground/15 bg-background/60 shadow-2xl shadow-black/40 overflow-hidden"
             >
               <div className="relative h-11 shrink-0">
                 <div className="absolute left-1/2 top-2.5 h-5 w-20 -translate-x-1/2 rounded-full bg-foreground/15" />
