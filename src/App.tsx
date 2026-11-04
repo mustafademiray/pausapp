@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AnalyticsPageView from "@/components/AnalyticsPageView";
@@ -11,11 +11,18 @@ import NotFound from "./pages/NotFound.tsx";
 const queryClient = new QueryClient();
 const ImpulseSpendingSurvey = lazy(() => import("./pages/ImpulseSpendingSurvey.tsx"));
 
-const App = () => (
+export const AppShell = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      {children}
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+const App = () => (
+  <AppShell>
       <BrowserRouter>
         <AnalyticsPageView />
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
@@ -26,8 +33,7 @@ const App = () => (
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  </AppShell>
 );
 
 export default App;
