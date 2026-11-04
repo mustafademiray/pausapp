@@ -121,7 +121,7 @@ const ImpulseSpendingSurvey = () => {
             {phase === "intro" && (
               <motion.section
                 key="intro"
-                initial={{ opacity: 0, y: 18 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 className="grid w-full items-center gap-10 lg:grid-cols-[1fr_0.72fr]"
