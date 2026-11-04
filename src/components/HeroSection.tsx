@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import pausLogo from "@/assets/paus-logo.png";
+
 import AppStoreLink from "@/components/AppStoreLink";
 
 const HeroSection = () => {
@@ -12,7 +12,10 @@ const HeroSection = () => {
         className="relative z-10 flex flex-col items-center text-center max-w-3xl"
       >
         <motion.img
-          src={pausLogo}
+          src="/images/paus-logo-96.webp"
+          srcSet="/images/paus-logo-96.webp 1x, /images/paus-logo-192.webp 2x"
+          width={96}
+          height={96}
           alt="paus logo"
           className="w-24 h-24 rounded-3xl shadow-2xl mb-8"
           initial={{ scale: 0.8, opacity: 0 }}

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import pausLogo from "@/assets/paus-logo.png";
+
 import AppStoreLink from "@/components/AppStoreLink";
 
 const CtaSection = () => {
@@ -11,7 +11,7 @@ const CtaSection = () => {
         viewport={{ once: true }}
         className="max-w-3xl mx-auto bg-foreground/10 backdrop-blur-sm border border-foreground/10 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
       >
-        <img src={pausLogo} alt="paus" className="w-16 h-16 rounded-2xl mx-auto mb-6 relative z-10" />
+        <img src="/images/paus-logo-96.webp" srcSet="/images/paus-logo-96.webp 1x, /images/paus-logo-192.webp 2x" width={64} height={64} loading="lazy" alt="paus" className="w-16 h-16 rounded-2xl mx-auto mb-6 relative z-10" />
         
         <h2 className="text-3xl md:text-5xl font-display text-foreground mb-4 relative z-10">
           Ready to take a paus?

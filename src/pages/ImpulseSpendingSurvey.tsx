@@ -4,8 +4,7 @@ import { ArrowLeft, ArrowRight, Check, RotateCcw, Sparkles } from "lucide-react"
 import { Link } from "react-router-dom";
 import AppStoreLink from "@/components/AppStoreLink";
 import { Progress } from "@/components/ui/progress";
-import pausLogo from "@/assets/paus-logo.png";
-import mascotHappy from "@/assets/paus-mascot-happy.png";
+
 import { captureEvent } from "@/lib/analytics";
 import {
   getSupportRecommendation,
@@ -34,12 +33,11 @@ const ImpulseSpendingSurvey = () => {
   const progress = ((questionIndex + 1) / surveyQuestions.length) * 100;
 
   useEffect(() => {
-    const previousTitle = document.title;
     document.title = "Your impulse spending pattern | paus";
     window.scrollTo(0, 0);
 
     return () => {
-      document.title = previousTitle;
+      document.title = "paus — Think before you spend";
       if (processingTimer.current) clearTimeout(processingTimer.current);
     };
   }, []);
@@ -110,7 +108,7 @@ const ImpulseSpendingSurvey = () => {
       <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-5xl flex-col px-5 py-5 sm:px-8 sm:py-7">
         <header className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-            <img src={pausLogo} alt="" className="h-10 w-10 rounded-xl shadow-lg" />
+            <img src="/images/paus-logo-96.webp" srcSet="/images/paus-logo-96.webp 1x, /images/paus-logo-192.webp 2x" width={40} height={40} alt="" className="h-10 w-10 rounded-xl shadow-lg" />
             <span className="font-display text-2xl font-semibold">paus</span>
           </Link>
           <span className="rounded-full border border-foreground/10 bg-foreground/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
@@ -158,7 +156,7 @@ const ImpulseSpendingSurvey = () => {
                     <p className="font-display text-3xl leading-tight">A useful pause starts by noticing what came before the urge.</p>
                     <div className="mt-8 flex items-end justify-between">
                       <span className="max-w-[11rem] text-sm leading-relaxed text-muted-foreground">Not a diagnosis. Just a clearer moment before checkout.</span>
-                      <img src={mascotHappy} alt="paus mascot" className="w-24 drop-shadow-xl" />
+                      <img src="/images/paus-mascot-happy-96.webp" srcSet="/images/paus-mascot-happy-96.webp 1x, /images/paus-mascot-happy-192.webp 2x" width={96} height={91} alt="paus mascot" className="w-24 drop-shadow-xl" />
                     </div>
                   </div>
                 </div>

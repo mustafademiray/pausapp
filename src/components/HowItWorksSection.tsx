@@ -8,7 +8,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { Bell, Check, Flame, Pause, Zap } from "lucide-react";
-import pausLogo from "@/assets/paus-logo.png";
+
 
 const PHONE_HEIGHT = 620;
 
@@ -415,7 +415,10 @@ const HowItWorksSection = () => {
                       >
                         <div className="flex items-start gap-3">
                           <img
-                            src={pausLogo}
+                            src="/images/paus-logo-96.webp"
+                            srcSet="/images/paus-logo-96.webp 1x, /images/paus-logo-192.webp 2x"
+                            width={36}
+                            height={36}
                             alt=""
                             className="h-9 w-9 rounded-lg"
                           />
